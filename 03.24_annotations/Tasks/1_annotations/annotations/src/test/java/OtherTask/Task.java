@@ -1,3 +1,5 @@
+package OtherTask;
+
 import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,7 +9,12 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class Task {
@@ -24,23 +31,21 @@ public class Task {
     String address = "Do not remember";
 
     @BeforeEach
-    public void beforeEach() throws InterruptedException {
+    public void beforeEach() {
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(5));
         driver.get("https://demoqa.com/");
         driver.findElement(By.xpath("//a[@href='/forms']")).click();
-        Thread.sleep(1000);
     }
 
     @AfterEach
-    public void afterEach() throws InterruptedException {
-        Thread.sleep(3000);
+    public void afterEach() {
         driver.quit();
     }
 
     @Test
-    public void Test1() throws InterruptedException {
+    public void Test1() {
         driver.findElement(By.xpath("//span[normalize-space()='Practice Form']")).click();
-        Thread.sleep(1000);
         driver.findElement(By.cssSelector("#firstName")).sendKeys(fName);
         driver.findElement(By.xpath("//input[@id='lastName']")).sendKeys(lName);
         driver.findElement(By.xpath("//input[@id='userEmail']")).sendKeys(randomEmail);
@@ -49,27 +54,31 @@ public class Task {
         driver.findElement(By.xpath("//input[@id='dateOfBirthInput']")).click();
         new Select(driver.findElement(By.xpath("//select[@class='react-datepicker__month-select']"))).selectByVisibleText("December");
         new Select(driver.findElement(By.xpath("//select[@class='react-datepicker__year-select']"))).selectByVisibleText("1990");
-        driver.findElement(By.xpath("//div[@aria-label='Choose Friday, December 28th, 1990']")).click();
-        WebElement subject = driver.findElement(By.xpath("//input[@id='subjectsInput']"));
-        subject.sendKeys("C");
-        subject.sendKeys(Keys.DOWN);
-        subject.sendKeys(Keys.DOWN);
-        subject.sendKeys(Keys.ENTER);
+        driver.findElement(By.xpath("(//div[@role='gridcell'][contains(text(), '28')])[last()]")).click();
+        WebElement input = driver.findElement(By.id("subjectsInput"));
+        input.click();
+        input.sendKeys("Comp");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebElement option = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@role='option' and text()='Computer Science']")
+        ));
+        option.click();
         driver.findElement(By.xpath("//input[@id='hobbies-checkbox-2']")).click();
         driver.findElement(By.xpath("//textarea[@id='currentAddress']")).sendKeys(address);
         driver.findElement(By.xpath("//input[@id='react-select-3-input']")).sendKeys(Keys.SPACE);
-        driver.findElement(By.xpath("//div[@id='react-select-3-option-0']")).click();
+        option = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='react-select-3-option-0']")
+        ));
+        option.click();
         driver.findElement(By.xpath("//input[@id='react-select-4-input']")).sendKeys(Keys.SPACE);
         driver.findElement(By.xpath("//div[@id='react-select-4-option-2']")).click();
         driver.findElement(By.xpath("//button[@id='submit']")).submit();
-        assertThat(driver.findElement(By.xpath("//td[normalize-space()='" + fName + " " + lName + "']")).getText()).isEqualTo(fName + " " + lName);
-        assertThat(driver.findElement(By.xpath("//td[normalize-space()='" + randomEmail + "']")).getText()).isEqualTo(randomEmail);
-        assertThat(driver.findElement(By.xpath("//td[normalize-space()='Male']")).getText()).isEqualTo("Male");
-        assertThat(driver.findElement(By.xpath("//td[normalize-space()='" + randomNumber + "']")).getText()).isEqualTo(randomNumber);
-        assertThat(driver.findElement(By.xpath("//td[normalize-space()='28 December,1990']")).getText()).isEqualTo("28 December,1990");
-        assertThat(driver.findElement(By.xpath("//td[normalize-space()='Computer Science']")).getText()).isEqualTo("Computer Science");
-        assertThat(driver.findElement(By.xpath("//td[normalize-space()='Reading']")).getText()).isEqualTo("Reading");
-        assertThat(driver.findElement(By.xpath("//td[normalize-space()='" + address + "']")).getText()).isEqualTo(address);
-        assertThat(driver.findElement(By.xpath("//td[normalize-space()='NCR Noida']")).getText()).isEqualTo("NCR Noida");
+        assertThat(driver.findElement(By.xpath("//tbody//td[contains(text(), 'Student Name')]/following-sibling::td")).getText()).isEqualTo(fName + " " + lName);
+        assertThat(driver.findElement(By.xpath("//tbody//td[contains(text(), 'Student Email')]/following-sibling::td")).getText()).isEqualTo(randomEmail);
+        assertThat(driver.findElement(By.xpath("//tbody//td[contains(text(), 'Gender')]/following-sibling::td")).getText()).isEqualTo("Male");
+        assertThat(driver.findElement(By.xpath("//tbody//td[contains(text(), 'Mobile')]/following-sibling::td")).getText()).isEqualTo(randomNumber);
+        assertThat(driver.findElement(By.xpath("//tbody//td[contains(text(), 'Date of Birth')]/following-sibling::td")).getText()).isEqualTo("28 December,1990");
+        assertThat(driver.findElement(By.xpath("//tbody//td[contains(text(), 'Subjects')]/following-sibling::td")).getText()).isEqualTo("Computer Science");
+        assertThat(driver.findElement(By.xpath("//tbody//td[contains(text(), 'Hobbies')]/following-sibling::td")).getText()).isEqualTo("Reading");
+        assertThat(driver.findElement(By.xpath("//tbody//td[contains(text(), 'Address')]/following-sibling::td")).getText()).isEqualTo(address);
+        assertThat(driver.findElement(By.xpath("//tbody//td[contains(text(), 'State and City')]/following-sibling::td")).getText()).isEqualTo("NCR Noida");
     }
 }

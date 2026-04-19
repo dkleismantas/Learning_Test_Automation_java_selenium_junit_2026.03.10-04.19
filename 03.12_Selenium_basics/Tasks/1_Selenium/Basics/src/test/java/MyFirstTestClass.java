@@ -42,7 +42,7 @@ public class MyFirstTestClass {
 //        Print selected option from the dropbox
         System.out.println(new Select(driver.findElement(By.cssSelector("#input-limit"))).getFirstSelectedOption().getText());
 //        Select 4th option in show items per page dropbox
-        new Select(driver.findElement(By.cssSelector("#input-limit"))).selectByIndex(4);
+        new Select(driver.findElement(By.cssSelector("#input-limit"))).selectByIndex(3);
 //        Print selected option
         System.out.println(new Select(driver.findElement(By.cssSelector("#input-limit"))).getFirstSelectedOption().getText());
 //        Close the window

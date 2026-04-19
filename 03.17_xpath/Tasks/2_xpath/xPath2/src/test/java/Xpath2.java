@@ -3,6 +3,11 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class Xpath2 {
 
@@ -12,7 +17,8 @@ public class Xpath2 {
         driver.manage().window().maximize();
         driver.get("https://demoqa.com/");
         driver.findElement(By.xpath("//a[contains(@href, 'elements')]")).click();
-        Thread.sleep(1000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@href, 'text-box')]")));
         driver.findElement(By.xpath("//a[contains(@href, 'text-box')]")).click();
         driver.findElement(By.xpath("//input[@id='userName']")).sendKeys("Da Kl");
         String randomEmail = RandomString.make() + "@email.com";

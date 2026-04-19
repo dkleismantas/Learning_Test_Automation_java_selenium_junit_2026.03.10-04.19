@@ -1,3 +1,5 @@
+package OtherTask;
+
 import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +12,7 @@ import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class OldTaskFix {
+public class Task_v2 {
 
     WebDriver driver = new ChromeDriver();
     String fName = "Da";

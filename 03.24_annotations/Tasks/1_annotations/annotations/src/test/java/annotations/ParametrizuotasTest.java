@@ -1,6 +1,7 @@
 package annotations;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -19,6 +20,11 @@ public class ParametrizuotasTest {
         driver.get("https://opencart.abstracta.us/");
     }
 
+    @AfterEach
+    void afterEach() {
+        driver.quit();
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"Your Store", "OOPS"})
     void testas(String expectedTitle) {
@@ -26,10 +32,10 @@ public class ParametrizuotasTest {
         Assertions.assertThat(actualTitle).isEqualTo(expectedTitle);
     }
 
-//    @ParameterizedTest
-//    @ValueSource(ints = {1,3,3})
-//    void testas(int expectedParam) {
-//        int actualSize = 3;
-//        Assertions.assertThat(actualSize).isEqualTo(expectedParam);
-//    }
+    @ParameterizedTest
+    @ValueSource(ints = {1,3,3})
+    void testas2(int expectedParam) {
+        int actualSize = 3;
+        Assertions.assertThat(actualSize).isEqualTo(expectedParam);
+    }
 }

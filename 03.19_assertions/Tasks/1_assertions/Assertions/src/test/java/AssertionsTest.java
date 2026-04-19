@@ -21,7 +21,7 @@ public class AssertionsTest {
 //          URL
         Assertions.assertEquals("https://opencart.abstracta.us/", driver.getCurrentUrl());
         //#logo teksta
-        Assertions.assertEquals("Your Store", driver.findElement(By.xpath("//a[normalize-space()='Your Store']")).getText());
+        Assertions.assertEquals("Your Store", driver.findElement(By.xpath("//a[contains(text(),'Your Store')]")).getText());
 //mygtukas yra - data-original-title="Add to Wish List"
         Assertions.assertTrue(driver.findElement(By.cssSelector("[data-original-title='Add to Wish List']")).isDisplayed());
 //texta - Powered By OpenCart Your Store © 2026
@@ -36,15 +36,14 @@ public class AssertionsTest {
 //pirmas produktas (.product-layout h4) yra "Macbook"
         Assertions.assertEquals("MacBook", driver.findElement(By.cssSelector(".product-layout h4")).getText());
 //antro produkto kaina (.product-layout .price) yra $123.20
-        WebElement el = driver.findElements(By.xpath("//*[contains(@class,'price')]")).get(2);
+        WebElement el = driver.findElement(By.xpath("//a[contains(text(),'iPhone')]/../following-sibling::p[2]"));
         String text = el.getText().split("\n")[0];
         Assertions.assertEquals("$123.20", text);
 //        patikrint kad Canon EOS 5D alt tekstas yra "Canon EOS 5D"
-        Assertions.assertEquals("Canon EOS 5D", driver.findElement(By.xpath("//img[@title='Canon EOS 5D']")).getAttribute("alt"));
+        Assertions.assertEquals("Canon EOS 5D", driver.findElement(By.cssSelector("[title='Canon EOS 5D']")).getAttribute("alt"));
 //Valiuta  (#form-currency strong) yra $
         Assertions.assertEquals("$", driver.findElement(By.cssSelector("#form-currency strong")).getText());
 //        ---
-        Thread.sleep(3000);
         driver.quit();
     }
 

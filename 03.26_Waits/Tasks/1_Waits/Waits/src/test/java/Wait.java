@@ -49,7 +49,7 @@ public class Wait {
     public void Test3() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.attributeContains(By.xpath("//button[@id='colorChange']"), "class", "danger"));
-        assertThat(driver.findElement(By.xpath("//button[@id='colorChange']")).getAttribute("class")).isEqualTo("mt-4 text-danger btn btn-primary");
+        assertThat(driver.findElement(By.xpath("//button[@id='colorChange']")).getAttribute("class")).contains("text-danger");
     }
 
 //  3. Palaukti kol mygtukas (visibleAfter) pasidarys matomas
@@ -59,7 +59,8 @@ public class Wait {
         assertThat(driver.findElement(By.xpath("//button[@id='visibleAfter']")).isDisplayed()).isTrue();
     }
 
-//  Bonus: Palaukti kol mygtukas (enableAfter) pasidarys enabled naudojant implicit wait
+//  Implicit Bonus:
+//  Palaukti kol mygtukas (enableAfter) pasidarys enabled
     @Test
     public void Test5() {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));

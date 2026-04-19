@@ -8,7 +8,7 @@ public class Xpath {
 
     @Test
     void test() {
-//        1.Create two tests that create a New Account using different locator strategies (CSS and xpath) (kolkas darom tik css)
+//        1.Create test that create a New Account using xpath.
         WebDriver driver = new ChromeDriver();
         driver.get("https://demo.webocreation.com/");
         driver.findElement(By.xpath("//div[contains(@class, 'fc-dialog')]//button")).click();

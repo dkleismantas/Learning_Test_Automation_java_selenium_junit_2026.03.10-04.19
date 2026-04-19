@@ -14,7 +14,7 @@ public class Xpath3 {
         WebDriver driver = new ChromeDriver(options);
         driver.get("http://opencart.abstracta.us/");
         driver.findElement(By.xpath("//*[@title='My Account']")).click();
-        driver.findElement(By.xpath("//*[text()='Register']")).click();
+        driver.findElement(By.xpath("//a[contains(@href, 'register')]")).click();
         driver.findElement(By.xpath("//*[@id='input-firstname']")).sendKeys("Jon");
         driver.findElement(By.xpath("//*[@id='input-lastname']")).sendKeys("Simons");
         String randomEmail = RandomString.make() + "@email.com";
