@@ -7,15 +7,16 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BasePage {
     protected WebDriver driver;
+
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(css = ".alert.alert-danger.alert-dismissible")
-    private WebElement dismissibleAlert;
+    @FindBy(css = ".alert-danger")
+    private WebElement alert;
 
-    public boolean isWarningMessageDisplayed() {
-        return dismissibleAlert.isDisplayed();
+    public String getAlertText() {
+        return alert.getText();
     }
 }

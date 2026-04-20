@@ -29,7 +29,9 @@ public class HomePage extends BasePage {
         return cartCount.getText();
     }
 
-    public void openCart() {
+    public void openCart() throws InterruptedException {
+        BrowserUtils.scrollTo(driver, cartIcon);
+        Thread.sleep(1000);
         cartIcon.click();
     }
 

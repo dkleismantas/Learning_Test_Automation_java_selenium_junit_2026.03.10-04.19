@@ -1,20 +1,20 @@
 import PageObjects.ProductDetails;
-import PageObjects.ProductsSection;
+import PageObjects.ProductCard;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class VerifyProductViewTest extends BaseTest{
 
-    ProductsSection productsSection;
+    ProductCard productCard;
     ProductDetails productDetails;
 
     @Test
     public void VerifyProductViewTest(){
-        productsSection = new ProductsSection(driver);
+        productCard = new ProductCard(driver);
         productDetails = new ProductDetails(driver);
 
-        productsSection.clickProductViewButton("Mystic Apparatus 1");
+        productCard.clickProductViewButton("Mystic Apparatus 1");
         String productTitle = productDetails.getProductTitle();
-        Assertions.assertThat(productTitle).isEqualTo(productsSection.getProductName(1));
+        Assertions.assertThat(productTitle).isEqualTo(productCard.getProductName(1));
     }
 }

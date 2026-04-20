@@ -25,7 +25,7 @@ public class LoginTest extends BaseTest {
 //        click login
         loginPage.clickLoginButton();
 //        ASERT (new page!)
-        assertThat(myAccountPage.getLogoutLink()).isEqualTo("Logout");
+        assertThat(myAccountPage.isMyAccountPresent()).isTrue();
     }
 
     @Test
@@ -44,20 +44,4 @@ public class LoginTest extends BaseTest {
         assertThat(loginPage.isWarningMessageDisplayed()).isTrue();
     }
 
-    @Test
-    void loginTestPass2() {
-        homePage = new HomePage(driver);
-        loginPage = new LoginPage(driver);
-        myAccountPage = new MyAccountPage(driver);
-
-        homePage.clickMyAccountLink();
-        homePage.clickLoginLink();
-        loginPage.typeEmail("labas@vakaras.lt");
-//        type pass
-        loginPage.typePassword("Labasvakaras1.");
-//        click login
-        loginPage.clickLoginButton();
-//        ASERT (new page!)
-        assertThat(myAccountPage.isMyAccountPresent()).isTrue();
-    }
 }

@@ -7,9 +7,9 @@ import java.util.List;
 
 import static Utils.ScroolAndClick.scrollAndClick;
 
-public class ProductsSection extends BasePage {
+public class ProductCard extends BasePage {
 
-    public ProductsSection(WebDriver driver) {
+    public ProductCard(WebDriver driver) {
         super(driver);
     }
 

@@ -11,7 +11,6 @@ public class BaseTest {
     void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless=new");
-        options.setAcceptInsecureCerts(true);
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get("https://todomvc.com/examples/emberjs/todomvc/dist/");

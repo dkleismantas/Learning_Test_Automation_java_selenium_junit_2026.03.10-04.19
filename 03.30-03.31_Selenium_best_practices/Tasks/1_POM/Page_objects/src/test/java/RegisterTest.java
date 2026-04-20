@@ -1,17 +1,11 @@
-import net.bytebuddy.utility.RandomString;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobjects.AccountCreationConfirmPage;
 import pageobjects.HomePage;
 import pageobjects.MyAccountPage;
 import pageobjects.RegistrationPage;
-import utils.DataGenerator;
-
-import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static utils.DataGenerator.*;
 
 public class RegisterTest extends BaseTest{
 
@@ -28,16 +22,17 @@ public class RegisterTest extends BaseTest{
         myAccountPage = new MyAccountPage(driver);
         homePage.clickMyAccountLink();
         homePage.clickRegisterLink();
-        registrationPage.typeFirstName(DataGenerator.generateFirstName());
-        registrationPage.typeLastName(DataGenerator.generateLastName());
-        registrationPage.typeEmail(DataGenerator.generateEmail());
-        registrationPage.typeTelephone(DataGenerator.generatePhoneNumber());
+        registrationPage.typeFirstName(generateFirstName());
+        registrationPage.typeLastName(generateLastName());
+        registrationPage.typeEmail(generateEmail());
+        registrationPage.typeTelephone(generatePhoneNumber());
         registrationPage.typePassword("Labasvakaras1.");
         registrationPage.typeConfirmPassword("Labasvakaras1.");
         registrationPage.clickAgreeButton();
         registrationPage.clickContinueButton();
+        assertThat(driver.getTitle()).isEqualTo("Your Account Has Been Created!");
         accountCreationConfirmPage.clickContinueButton();
-        Assertions.assertThat(myAccountPage.isMyAccountPresent()).isTrue();
+        assertThat(myAccountPage.isMyAccountPresent()).isTrue();
     }
 
     @Test
@@ -46,13 +41,13 @@ public class RegisterTest extends BaseTest{
         registrationPage = new RegistrationPage(driver);
         homePage.clickMyAccountLink();
         homePage.clickRegisterLink();
-        registrationPage.typeFirstName(DataGenerator.generateFirstName());
-        registrationPage.typeLastName(DataGenerator.generateLastName());
-        registrationPage.typeEmail(DataGenerator.generateEmail());
-        registrationPage.typeTelephone(DataGenerator.generatePhoneNumber());
+        registrationPage.typeFirstName(generateFirstName());
+        registrationPage.typeLastName(generateLastName());
+        registrationPage.typeEmail(generateEmail());
+        registrationPage.typeTelephone(generatePhoneNumber());
         registrationPage.typePassword("Labasvakaras1.");
         registrationPage.typeConfirmPassword("Labasvakaras1.");
         registrationPage.clickContinueButton();
-        Assertions.assertThat(registrationPage.isWarningMessageDisplayed()).isTrue();
+        assertThat(registrationPage.isWarningMessageDisplayed()).isTrue();
     }
 }

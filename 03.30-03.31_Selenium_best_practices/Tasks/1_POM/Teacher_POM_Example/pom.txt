@@ -1,0 +1,13 @@
+Main:
+    pageobjects.BasePage (visi page objkektai paveldes sia klase)
+    Page objects:
+        pageobjects.LoginPage
+        pageobjects.HomePage
+        ...
+
+Test:
+    BaseTest (visi testai paveldes sia klase)
+    Test klases:
+        LoginTest
+        HomeTest
+        ...

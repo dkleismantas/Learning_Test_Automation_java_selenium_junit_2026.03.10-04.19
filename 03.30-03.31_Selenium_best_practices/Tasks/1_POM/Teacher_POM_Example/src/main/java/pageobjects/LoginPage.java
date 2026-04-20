@@ -8,10 +8,10 @@ public class LoginPage extends BasePage {
     @FindBy(css = "#input-email")
     private WebElement emailInput;
 
-    @FindBy(xpath = "//input[@id='input-password']")
+    @FindBy(css = "#input-password")
     private WebElement passwordInput;
 
-    @FindBy(xpath = "//input[@value='Login']")
+    @FindBy(css = "[value='Login']")
     private WebElement loginButton;
 
     public LoginPage(WebDriver driver) {
@@ -29,5 +29,6 @@ public class LoginPage extends BasePage {
     public void clickLoginButton() {
         loginButton.click();
     }
+
 
 }
