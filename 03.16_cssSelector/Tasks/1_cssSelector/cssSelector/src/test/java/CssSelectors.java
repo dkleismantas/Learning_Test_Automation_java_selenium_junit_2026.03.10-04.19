@@ -28,7 +28,6 @@ public class CssSelectors {
         driver.findElement(By.cssSelector("#input-custom-field-30")).sendKeys("Disabled");
         new Select(driver.findElement(By.cssSelector("#input-custom-field-29"))).selectByIndex(3);
         driver.findElement(By.cssSelector("#input-password")).sendKeys("Hello123456.");
-        driver.findElement(By.xpath("//input[@name='agree']")).sendKeys(Keys.SPACE);
         driver.findElement(By.cssSelector("[name='agree']")).sendKeys(Keys.SPACE);
         driver.findElement(By.cssSelector(".btn.btn-primary")).submit();
 

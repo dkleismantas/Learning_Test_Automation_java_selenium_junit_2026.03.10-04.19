@@ -1,3 +1,4 @@
+import PageObjects.CoockiesPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
@@ -7,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class BaseTest {
     WebDriver driver;
+    CoockiesPage coockiesPage;
 
     @BeforeEach
     void setUp() {
@@ -14,10 +16,11 @@ public class BaseTest {
 //        options.addArguments("--headless=new");
         options.setAcceptInsecureCerts(true);
         driver = new ChromeDriver(options);
+        coockiesPage = new CoockiesPage(driver);
         driver.manage().window().maximize();
         driver.get("https://demo.webocreation.com/");
-        driver.findElement(By.cssSelector(".fc-dialog button")).click();
-        driver.findElement(By.cssSelector("#cookie button:last-child")).click();
+        coockiesPage.clickButtonConsent();
+        coockiesPage.clickButtonNoThanks();
     }
 
     @AfterEach

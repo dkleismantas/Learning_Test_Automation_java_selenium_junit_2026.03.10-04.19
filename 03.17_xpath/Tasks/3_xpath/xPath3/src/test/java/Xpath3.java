@@ -9,9 +9,7 @@ public class Xpath3 {
 
     @Test
     void test() throws InterruptedException {
-        ChromeOptions options = new ChromeOptions();
-        options.setAcceptInsecureCerts(true);
-        WebDriver driver = new ChromeDriver(options);
+        WebDriver driver = new ChromeDriver();
         driver.get("http://opencart.abstracta.us/");
         driver.findElement(By.xpath("//*[@title='My Account']")).click();
         driver.findElement(By.xpath("//a[contains(@href, 'register')]")).click();
@@ -20,8 +18,9 @@ public class Xpath3 {
         String randomEmail = RandomString.make() + "@email.com";
         driver.findElement(By.xpath("//*[@id='input-email']")).sendKeys(randomEmail);
         driver.findElement(By.xpath("//*[@id='input-telephone']")).sendKeys("+37060000000");
-        driver.findElement(By.xpath("//*[@id='input-password']")).sendKeys("Hello123.");
-        driver.findElement(By.xpath("//*[@id='input-confirm']")).sendKeys("Hello123.");
+        String password = "Hello123.";
+        driver.findElement(By.xpath("//*[@id='input-password']")).sendKeys(password);
+        driver.findElement(By.xpath("//*[@id='input-confirm']")).sendKeys(password);
         driver.findElement(By.xpath("//*[@name='agree']")).click();
         driver.findElement(By.xpath("//*[@type='submit']")).submit();
         driver.quit();

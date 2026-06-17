@@ -16,8 +16,7 @@ public class DesktopsPage extends BasePage{
 
 
     public void selectToShowItemsPerPage(int numberOfItems) {
-        Select showItemsPerPageSelect = new Select(showItemsPerPageInput);
-        showItemsPerPageSelect.selectByVisibleText(String.valueOf(numberOfItems));
+        new Select(showItemsPerPageInput).selectByVisibleText(String.valueOf(numberOfItems));
     }
 
     public int getSelectedItemsPerPage() {
