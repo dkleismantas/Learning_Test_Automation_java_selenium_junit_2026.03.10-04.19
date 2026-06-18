@@ -1,6 +1,7 @@
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pageobjects.HomePage;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class CheckToDoList extends BaseTest {
 
@@ -11,9 +12,9 @@ public class CheckToDoList extends BaseTest {
         homePage = new HomePage(driver);
 
         homePage.sendValuesToToDo("a", "b", "c");
-        Assertions.assertThat(homePage.getToDoListValues()).containsIgnoringNewLines("a", "b", "c");
+        assertThat(homePage.getToDoListValues()).containsIgnoringNewLines("a", "b", "c");
         homePage.clickToDoValueCheckboxOfProvidedToDoValue("b");
-        Assertions.assertThat(homePage.getCompletedListValues()).contains("b");
-        Assertions.assertThat(homePage.getListNotCompleted()).contains("a", "c");
+        assertThat(homePage.getCompletedListValues()).contains("b");
+        assertThat(homePage.getListNotCompleted()).contains("a", "c");
     }
 }

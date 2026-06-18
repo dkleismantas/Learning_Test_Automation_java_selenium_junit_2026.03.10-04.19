@@ -4,10 +4,7 @@ import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -45,7 +42,7 @@ public class Task {
 
     @Test
     public void Test1() {
-        driver.findElement(By.xpath("//span[normalize-space()='Practice Form']")).click();
+        driver.findElement(By.xpath("//*[contains(@href, 'practice-form')]")).click();
         driver.findElement(By.cssSelector("#firstName")).sendKeys(fName);
         driver.findElement(By.xpath("//input[@id='lastName']")).sendKeys(lName);
         driver.findElement(By.xpath("//input[@id='userEmail']")).sendKeys(randomEmail);
@@ -56,15 +53,21 @@ public class Task {
         new Select(driver.findElement(By.xpath("//select[@class='react-datepicker__year-select']"))).selectByVisibleText("1990");
         driver.findElement(By.xpath("(//div[@role='gridcell'][contains(text(), '28')])[last()]")).click();
         WebElement input = driver.findElement(By.id("subjectsInput"));
-        input.click();
         input.sendKeys("Comp");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement option = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@role='option' and text()='Computer Science']")
+        WebElement option = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@role='option' and text()='Computer Science']")
         ));
         option.click();
         driver.findElement(By.xpath("//input[@id='hobbies-checkbox-2']")).click();
         driver.findElement(By.xpath("//textarea[@id='currentAddress']")).sendKeys(address);
-        driver.findElement(By.xpath("//input[@id='react-select-3-input']")).sendKeys(Keys.SPACE);
+        WebElement state = driver.findElement(By.xpath("//input[@id='react-select-3-input']"));
+        try {
+            state.click();
+        } catch (ElementClickInterceptedException e) {
+            ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].scrollIntoView({block: 'center'});", state);
+            state.sendKeys(Keys.SPACE);
+        }
         option = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='react-select-3-option-0']")
         ));
         option.click();

@@ -30,7 +30,7 @@ public class RegisterTest extends BaseTest{
         registrationPage.typeConfirmPassword("Labasvakaras1.");
         registrationPage.clickAgreeButton();
         registrationPage.clickContinueButton();
-        assertThat(driver.getTitle()).isEqualTo("Your Account Has Been Created!");
+        assertThat(accountCreationConfirmPage.getPageTitle()).isEqualTo("Your Account Has Been Created!");
         accountCreationConfirmPage.clickContinueButton();
         assertThat(myAccountPage.isMyAccountPresent()).isTrue();
     }

@@ -1,9 +1,10 @@
 import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -43,6 +44,9 @@ public class AssertJ {
         driver.findElement(By.xpath("//input[@id='userEmail']")).sendKeys(randomEmail);
         driver.findElement(By.xpath("//textarea[@id='currentAddress']")).sendKeys("Not your business");
         driver.findElement(By.xpath("//textarea[@id='permanentAddress']")).sendKeys("Not your business again");
+        WebElement button = driver.findElement(By.xpath("//button[@id='submit']"));
+        ((JavascriptExecutor) driver).executeScript(
+                "arguments[0].scrollIntoView({block: 'center'});", button);
         driver.findElement(By.xpath("//button[@id='submit']")).click();
         assertThat(driver.findElement(By.xpath("//p[@id='name']")).getText()).contains("Da Kl");
         assertThat(driver.findElement(By.xpath("//p[@id='email']")).getText()).contains(randomEmail);

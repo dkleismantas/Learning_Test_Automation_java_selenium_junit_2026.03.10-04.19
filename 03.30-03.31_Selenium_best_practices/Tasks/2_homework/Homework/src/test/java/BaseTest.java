@@ -12,7 +12,7 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless=new");
         driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
+//        driver.manage().window().maximize();
         driver.get("https://todomvc.com/examples/emberjs/todomvc/dist/");
     }
 

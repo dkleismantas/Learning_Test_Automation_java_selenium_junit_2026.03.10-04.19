@@ -9,19 +9,19 @@ import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.*;
 
-public class Wait {
+public class Waits {
 
     WebDriver driver;
 
     @BeforeEach
-    public void beforeEach() throws InterruptedException {
+    public void beforeEach() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://demoqa.com/dynamic-properties");
     }
 
     @AfterEach
-    public void afterEach() throws InterruptedException {
+    public void afterEach() {
         driver.quit();
     }
 

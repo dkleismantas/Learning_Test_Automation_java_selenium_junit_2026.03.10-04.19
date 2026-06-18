@@ -20,11 +20,8 @@ public class LoginTest extends BaseTest {
         homePage.clickMyAccountLink();
         homePage.clickLoginLink();
         loginPage.typeEmail("laba@diena.lt");
-//        type pass
         loginPage.typePassword("Labadiena1.");
-//        click login
         loginPage.clickLoginButton();
-//        ASERT (new page!)
         assertThat(myAccountPage.isMyAccountPresent()).isTrue();
     }
 
@@ -32,15 +29,11 @@ public class LoginTest extends BaseTest {
     void loginTestFail() {
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
-
         homePage.clickMyAccountLink();
         homePage.clickLoginLink();
         loginPage.typeEmail("laba@diena.lt");
-//        type pass
         loginPage.typePassword("Labadiena12.");
-//        click login
         loginPage.clickLoginButton();
-//        ASERT (new page!)
         assertThat(loginPage.isWarningMessageDisplayed()).isTrue();
     }
 

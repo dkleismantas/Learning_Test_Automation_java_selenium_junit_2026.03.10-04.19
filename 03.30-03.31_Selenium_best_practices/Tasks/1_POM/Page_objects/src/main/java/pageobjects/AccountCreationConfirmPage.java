@@ -16,4 +16,8 @@ public class AccountCreationConfirmPage extends BasePage{
     public void clickContinueButton() {
         continueButton.click();
     }
+
+    public String getPageTitle() {
+        return driver.getTitle();
+    }
 }
